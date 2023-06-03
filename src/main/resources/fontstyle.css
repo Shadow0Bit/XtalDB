@@ -1,0 +1,13 @@
+@font-face {
+    font-family: Roboto Mono SemiBold;
+    src: url('fonts/RobotoMono-SemiBold.ttf');
+}
+
+.label {
+    -fx-font-family: "Roboto Mono SemiBold";
+    -fx-font-size: 120;
+}
+
+.button .text {
+    -fx-font-family: "Roboto Mono SemiBold";
+}

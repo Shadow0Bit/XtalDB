@@ -1,0 +1,15 @@
+.button:focus {
+    color: #171e29;
+}
+
+.button:hover {
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
+}
+
+.button:active {
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
+}

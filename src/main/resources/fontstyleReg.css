@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Roboto Mono Regular;
+    src: url('fonts/RobotoMono-Regular.ttf');
+}
+
+.label {
+    -fx-font-family: "Roboto Mono Regular";
+}
+
+.button .text {
+    -fx-font-family: "Roboto Mono Regular";
+}
+
+.text-field {
+    -fx-font-family: "Roboto Mono SemiBold";
+}
