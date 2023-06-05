@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,7 +33,8 @@ public class LandingpageController implements Initializable {
     public void search(ActionEvent actionEvent) {
     }
 
-    public void goToProfile(ActionEvent actionEvent) {
+    public void goToProfile(ActionEvent actionEvent) throws IOException {
+        SceneSwitchingUtils.switchScene(actionEvent, "userprofile-view.fxml");
     }
 
 

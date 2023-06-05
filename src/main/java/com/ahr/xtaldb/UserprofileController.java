@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +22,7 @@ public class UserprofileController implements Initializable {
 
     }
 
-    public void goHome(ActionEvent actionEvent) {
+    public void goHome(ActionEvent actionEvent) throws IOException {
+        SceneSwitchingUtils.switchScene(actionEvent, "landingpage-view.fxml");
     }
 }

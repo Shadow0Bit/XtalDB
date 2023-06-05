@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,10 +24,12 @@ public class ProductController implements Initializable {
         
     }
 
-    public void goHome(ActionEvent actionEvent) {
+    public void goHome(ActionEvent actionEvent) throws IOException {
+        SceneSwitchingUtils.switchScene(actionEvent, "landingpage-view.fxml");
     }
 
-    public void goToReviews(ActionEvent actionEvent) {
+    public void goToReviews(ActionEvent actionEvent) throws IOException {
+        SceneSwitchingUtils.switchScene(actionEvent, "reviews-view.fxml");
     }
 
     public void buyProduct(ActionEvent actionEvent) {
