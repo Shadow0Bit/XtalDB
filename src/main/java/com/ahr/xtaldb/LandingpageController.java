@@ -42,11 +42,17 @@ public class LandingpageController implements Initializable {
                 }
             }
         });
+
+        try {
+            productList.getItems().addAll(DatabaseUtils.getProducts());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void search(ActionEvent actionEvent) throws SQLException {
         productList.getItems().clear();
-        productList.getItems().addAll(DatabaseUtils.getProducts());
+        productList.getItems().addAll(DatabaseUtils.getProducts(searchBar.getText()));
     }
 
     public void goToProfile(ActionEvent actionEvent) throws IOException {//ty chuju XDDDDDDDD
