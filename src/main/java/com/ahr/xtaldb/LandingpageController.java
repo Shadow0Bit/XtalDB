@@ -45,7 +45,7 @@ public class LandingpageController implements Initializable {
     }
 
     public void search(ActionEvent actionEvent) throws SQLException {
-
+        productList.getItems().clear();
         productList.getItems().addAll(DatabaseUtils.getProducts());
     }
 
