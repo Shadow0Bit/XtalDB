@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class DatabaseUtils {
     private static Connection connection;
@@ -13,6 +14,7 @@ public class DatabaseUtils {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ahr", "ahr", "ahr");
             PreparedStatement pstm = connection.prepareStatement("select * from idprojekt.genres;");
+            getProducts();
         } catch (SQLException e) {
             System.out.println("Eskeeeel");
             System.out.println(e);
@@ -45,5 +47,15 @@ public class DatabaseUtils {
         result = pstm.executeQuery();
         result.next();
         return result.getInt("user_id");
+    }
+
+    public static LinkedList<Product> getProducts() throws SQLException {
+        LinkedList<Product> output = new LinkedList<>();
+        PreparedStatement pstm = connection.prepareStatement("select * from idprojekt.productIDview;");
+        ResultSet result = pstm.executeQuery();
+        while(result.next()){
+            output.add(new Product(result.getString("name"), result.getInt("product_id")));
+        }
+        return output;
     }
 }
