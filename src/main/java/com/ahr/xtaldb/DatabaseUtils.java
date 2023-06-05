@@ -49,6 +49,14 @@ public class DatabaseUtils {
         return result.getInt("user_id");
     }
 
+    public static String getUser(int id) throws SQLException {
+        PreparedStatement pstm = connection.prepareStatement("select username from idprojekt.users where user_id=?;");
+        pstm.setInt(1, id);
+        ResultSet result = pstm.executeQuery();
+        result.next();
+        return result.getString("username");
+    }
+
     public static LinkedList<Product> getProducts() throws SQLException {
         LinkedList<Product> output = new LinkedList<>();
         PreparedStatement pstm = connection.prepareStatement("select * from idprojekt.productIDview;");

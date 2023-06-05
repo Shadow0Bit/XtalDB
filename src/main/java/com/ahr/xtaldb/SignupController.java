@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SignupController implements Initializable {
@@ -24,7 +25,8 @@ public class SignupController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void signUp(ActionEvent actionEvent) throws IOException {
+    public void signUp(ActionEvent actionEvent) throws IOException, SQLException {
+        DatabaseUtils.addUser(usernameTextbox.getText(), emailTextbox.getText(), passwordTextbox.getText());
         SceneSwitchingUtils.switchScene(actionEvent, "login-view.fxml");
     }
 

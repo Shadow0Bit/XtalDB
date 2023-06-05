@@ -9,14 +9,15 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
     @FXML
+    Label warningLabel;
+    @FXML
     Button logInButton, signUpButton;
-
-
     @FXML
     TextField usernameTextbox, passwordTextbox;
 
@@ -25,11 +26,20 @@ public class LoginController implements Initializable {
 
     }
 
-    public void logIn(ActionEvent actionEvent) throws IOException {
-        SceneSwitchingUtils.switchScene(actionEvent, "landingpage-view.fxml");
+    public void logIn(ActionEvent actionEvent) throws IOException, SQLException {
+        int userId = DatabaseUtils.authUser(usernameTextbox.getText(), passwordTextbox.getText());
+        if (userId != -1) {
+            CurrentState.setLoggedUser(new User(userId, DatabaseUtils.getUser(userId)));
+            SceneSwitchingUtils.switchScene(actionEvent, "landingpage-view.fxml");
+        } else {
+            usernameTextbox.clear();
+            passwordTextbox.clear();
+            warningLabel.setVisible(true);
+        }
     }
 
     public void goToSignUp(ActionEvent actionEvent) throws IOException {
+        warningLabel.setVisible(false);
         SceneSwitchingUtils.switchScene(actionEvent, "signup-view.fxml");
     }
 }
