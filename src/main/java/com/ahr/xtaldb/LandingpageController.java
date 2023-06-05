@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -21,7 +22,7 @@ public class LandingpageController implements Initializable {
     @FXML
     public Button searchButton;
     @FXML
-    public ListView<String> productList;
+    public ListView<Product> productList;
     @FXML
     public Label balance;
     @FXML
@@ -29,29 +30,23 @@ public class LandingpageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        productList.setCellFactory(param -> new ListCell<String>() {
+        productList.setCellFactory(param -> new ListCell<Product>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(Product item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
                     setText("");
                 } else {
-                    setText(item);
+                    setText(item.name);
                 }
             }
         });
     }
 
-    public void search(ActionEvent actionEvent) {
-        LinkedList<String> products = new LinkedList<String>();
-        byte[] array = new byte[100];
-        for (int i = 0; i < 1000; i++) {
-            new Random().nextBytes(array);
-            products.add(new String(array, StandardCharsets.UTF_8));
-        }
+    public void search(ActionEvent actionEvent) throws SQLException {
 
-        productList.getItems().addAll(products);
+        productList.getItems().addAll(DatabaseUtils.getProducts());
     }
 
     public void goToProfile(ActionEvent actionEvent) throws IOException {//ty chuju XDDDDDDDD
