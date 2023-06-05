@@ -20,13 +20,30 @@ public class DatabaseUtils {
         }
     }
 
-    public static boolean authUser(String username, String password) throws SQLException{
-        PreparedStatement pstm = connection.prepareStatement("select password from idprojekt.users where username=?;");
+    public static int authUser(String username, String password) throws SQLException{
+        PreparedStatement pstm = connection.prepareStatement("select password, user_id from idprojekt.users where username=?;");
         pstm.setString(1, username);
         ResultSet result = pstm.executeQuery();
         while (result.next()) {
-            if(result.getString("password").equals(password)) return true;
+            if(result.getString("password").equals(password)) return result.getInt("user_id");
         }
-        return false;
+        return -1;
+    }
+
+    public static int addUser(String username, String email, String password) throws SQLException{
+        PreparedStatement pstm = connection.prepareStatement("select user_id from idprojekt.users where email=?;");
+        pstm.setString(1, email);
+        ResultSet result = pstm.executeQuery();
+        if(result.next()) return -1;
+        pstm = connection.prepareStatement("insert into idprojekt.users values (DEFAULT, ?, ?, ?, DEFAULT);");
+        pstm.setString(1, username);
+        pstm.setString(2, email);
+        pstm.setString(3, password);
+        pstm.execute();
+        pstm = connection.prepareStatement("select user_id from idprojekt.users where email=?;");
+        pstm.setString(1, email);
+        result = pstm.executeQuery();
+        result.next();
+        return result.getInt("user_id");
     }
 }
