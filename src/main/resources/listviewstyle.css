@@ -1,0 +1,24 @@
+@font-face {
+    font-family: Roboto Mono Regular;
+    src: url('fonts/RobotoMono-Regular.ttf');
+}
+.list-view {
+    -fx-padding: 5px ;
+    -fx-background-color: #fffaf6;
+    -fx-border-radius: 10;
+}
+
+.list-cell {
+    -fx-padding: 8px ;
+    -fx-background-color: #fffaf6;
+    -fx-background: #f3e9de;
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #313131;
+    -fx-background-insets: 4px, 5px ;
+}
+
+.list-cell:empty {
+    -fx-padding: 8px ;
+    -fx-background-color: transparent ;
+    -fx-background-insets: 0 ;
+}

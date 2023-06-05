@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: fff5e9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ahr.xtaldb.ProductController">
+   <children>
+      <Label fx:id="productName" layoutX="101.0" layoutY="75.0" prefHeight="166.0" prefWidth="798.0" stylesheets="@../../../fontstyle.css" text="Game" textAlignment="CENTER">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <Label fx:id="balance" alignment="TOP_RIGHT" layoutX="1167.0" layoutY="15.0" prefHeight="34.0" prefWidth="141.0" stylesheets="@../../../fontstyleReg.css" text="420$" textAlignment="RIGHT">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="productPriceLabel" layoutX="222.0" layoutY="241.0" prefHeight="59.0" prefWidth="556.0" stylesheets="@../../../fontstyleReg.css" text="0$">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Button fx:id="homeButton" layoutX="22.0" layoutY="15.0" mnemonicParsing="false" onAction="#goHome" prefHeight="34.0" prefWidth="35.0" stylesheets="@../../../buttonstyle.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label fx:id="description" alignment="TOP_LEFT" layoutX="101.0" layoutY="312.0" prefHeight="395.0" prefWidth="633.0" stylesheets="@../../../fontstyleReg.css" text="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat." wrapText="true" />
+      <Label layoutX="984.0" layoutY="312.0" stylesheets="@../../../fontstyle.css" text="Dev:" />
+      <Label layoutX="984.0" layoutY="336.0" stylesheets="@../../../fontstyle.css" text="Publisher:" />
+      <Label layoutX="984.0" layoutY="361.0" stylesheets="@../../../fontstyle.css" text="Quota:" />
+      <Label layoutX="984.0" layoutY="384.0" stylesheets="@../../../fontstyle.css" text="Release date:" />
+      <Label layoutX="984.0" layoutY="407.0" stylesheets="@../../../fontstyle.css" text="Genres:" />
+      <Label layoutX="984.0" layoutY="430.0" stylesheets="@../../../fontstyle.css" text="System:" />
+      <Label fx:id="gameDevsLabel" layoutX="1106.0" layoutY="312.0" prefHeight="17.0" prefWidth="208.0" stylesheets="@../../../fontstyleReg.css" text="gamedeveloper" />
+      <Label fx:id="gamePublisherLabel" layoutX="1106.0" layoutY="336.0" prefHeight="17.0" prefWidth="208.0" stylesheets="@../../../fontstyleReg.css" text="gamepublisher" />
+      <Label fx:id="quotaLabel" layoutX="1106.0" layoutY="361.0" prefHeight="17.0" prefWidth="208.0" stylesheets="@../../../fontstyleReg.css" text="10Gb" />
+      <Label fx:id="releaseDate" layoutX="1106.0" layoutY="384.0" prefHeight="17.0" prefWidth="208.0" stylesheets="@../../../fontstyleReg.css" text="13.06.2023" />
+      <Label fx:id="genre" layoutX="1106.0" layoutY="407.0" prefHeight="17.0" prefWidth="208.0" stylesheets="@../../../fontstyleReg.css" text="Survival or smth" />
+      <Label fx:id="systems" layoutX="1106.0" layoutY="430.0" prefHeight="17.0" prefWidth="208.0" stylesheets="@../../../fontstyleReg.css" text="Windows" />
+      <Button fx:id="reviewsButton" layoutX="734.0" layoutY="306.0" mnemonicParsing="false" onAction="#goToReviews" prefHeight="29.0" prefWidth="110.0" text="see reviews" underline="true">
+         <stylesheets>
+            <URL value="@../../../fontstyleReg.css" />
+            <URL value="@../../../primitivebuttonstyle.css" />
+         </stylesheets>
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="buyButton" layoutX="105.0" layoutY="256.0" mnemonicParsing="false" onAction="#buyProduct" prefHeight="29.0" prefWidth="59.0" text="BUY">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <stylesheets>
+            <URL value="@../../../fontstyleReg.css" />
+            <URL value="@../../../buttonstyle.css" />
+         </stylesheets>
+      </Button>
+      <Button fx:id="wishlistButton" layoutX="174.0" layoutY="256.0" mnemonicParsing="false" onAction="#addToWishlist" prefHeight="29.0" prefWidth="29.0" text="+">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <stylesheets>
+            <URL value="@../../../fontstyleReg.css" />
+            <URL value="@../../../buttonstyle.css" />
+         </stylesheets>
+      </Button>
+   </children>
+</AnchorPane>

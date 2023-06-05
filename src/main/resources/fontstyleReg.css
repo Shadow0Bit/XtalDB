@@ -5,6 +5,7 @@
 
 .label {
     -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #313131;
 }
 
 .button .text {

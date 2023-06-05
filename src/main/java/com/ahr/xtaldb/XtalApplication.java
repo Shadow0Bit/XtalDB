@@ -12,7 +12,7 @@ public class XtalApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(XtalApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
         stage.setResizable(false);
-        stage.setTitle("MeloZone");
+        stage.setTitle("XtalDB");
         stage.setScene(scene);
         stage.show();
     }

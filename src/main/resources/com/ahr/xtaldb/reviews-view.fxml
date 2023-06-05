@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: fff5e9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ahr.xtaldb.ReviewsController">
+   <children>
+      <Label fx:id="usernameLabel" layoutX="101.0" layoutY="75.0" prefHeight="166.0" prefWidth="798.0" stylesheets="@../../../fontstyle.css" text="Game" textAlignment="CENTER">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <Label fx:id="balance" alignment="TOP_RIGHT" layoutX="1167.0" layoutY="15.0" prefHeight="34.0" prefWidth="141.0" stylesheets="@../../../fontstyleReg.css" text="420$" textAlignment="RIGHT">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="101.0" layoutY="213.0" stylesheets="@../../../fontstyleReg.css" text="reviwes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="homeButton" layoutX="22.0" layoutY="15.0" mnemonicParsing="false" onAction="#goHome" prefHeight="34.0" prefWidth="35.0" stylesheets="@../../../buttonstyle.css" />
+      <ListView fx:id="reviewList" layoutX="101.0" layoutY="256.0" prefHeight="441.0" prefWidth="798.0" stylesheets="@../../../listviewstyle.css" />
+      <TextArea fx:id="reviewInput" layoutX="965.0" layoutY="256.0" prefHeight="200.0" prefWidth="343.0" promptText="write your own review" style="-fx-background-color: #fffaf6;" stylesheets="@../../../fontstyle.css" wrapText="true" />
+      <Button fx:id="submitReviewButton" layoutX="1200.0" layoutY="464.0" mnemonicParsing="false" onAction="#submitReview" prefHeight="25.0" prefWidth="108.0" text="submit">
+         <stylesheets>
+            <URL value="@../../../fontstyleReg.css" />
+            <URL value="@../../../buttonstyle.css" />
+         </stylesheets>
+      </Button>
+   </children>
+</AnchorPane>
