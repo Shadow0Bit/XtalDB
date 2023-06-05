@@ -58,4 +58,15 @@ public class DatabaseUtils {
         }
         return output;
     }
+
+    public static LinkedList<Product> getProducts(String s) throws SQLException {
+        LinkedList<Product> output = new LinkedList<>();
+        PreparedStatement pstm = connection.prepareStatement("select * from idprojekt.productIDview where name like ?;");
+        pstm.setString(1, s);
+        ResultSet result = pstm.executeQuery();
+        while(result.next()){
+            output.add(new Product(result.getString("name"), result.getInt("product_id")));
+        }
+        return output;
+    }
 }
