@@ -9,6 +9,8 @@ import java.io.IOException;
 public class XtalApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        DatabaseUtils.connect();
+
         FXMLLoader fxmlLoader = new FXMLLoader(XtalApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
         stage.setResizable(false);
