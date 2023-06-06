@@ -13,8 +13,6 @@ public class DatabaseUtils {
     public static void connect() {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ahr", "ahr", "ahr");
-            PreparedStatement pstm = connection.prepareStatement("select * from idprojekt.genres;");
-            getProducts();
         } catch (SQLException e) {
             System.out.println("Eskeeeel");
             System.out.println(e);
