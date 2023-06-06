@@ -21,7 +21,7 @@ public class ProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        
+        productName.setText(CurrentState.getFocusedProduct().name);
     }
 
     public void goHome(ActionEvent actionEvent) throws IOException {

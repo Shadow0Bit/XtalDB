@@ -19,7 +19,8 @@ public class UserprofileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        usernameLabel.setText(CurrentState.getLoggedUser().username);
+        userIDLabel.setText("#" + String.valueOf(CurrentState.getLoggedUser().id));
     }
 
     public void goHome(ActionEvent actionEvent) throws IOException {

@@ -1,9 +1,11 @@
 package com.ahr.xtaldb;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -48,6 +50,19 @@ public class LandingpageController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        productList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (productList.getSelectionModel().getSelectedItem() == null) return;
+                try {
+                    CurrentState.setFocusOnProduct(productList.getSelectionModel().getSelectedItem());
+                    SceneSwitchingUtils.switchSceneMouseEvent(mouseEvent, "product-view.fxml");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     public void search(ActionEvent actionEvent) throws SQLException {
