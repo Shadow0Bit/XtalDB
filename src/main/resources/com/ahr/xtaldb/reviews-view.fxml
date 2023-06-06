@@ -20,7 +20,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="213.0" stylesheets="@../../../fontstyleReg.css" text="reviwes">
+      <Label layoutX="101.0" layoutY="213.0" stylesheets="@../../../fontstyleReg.css" text="reviews">
          <font>
             <Font size="20.0" />
          </font>
