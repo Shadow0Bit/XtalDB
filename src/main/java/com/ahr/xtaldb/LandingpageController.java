@@ -70,7 +70,7 @@ public class LandingpageController implements Initializable {
         productList.getItems().addAll(DatabaseUtils.getProducts(searchBar.getText()));
     }
 
-    public void goToProfile(ActionEvent actionEvent) throws IOException {//ty chuju XDDDDDDDD
+    public void goToProfile(ActionEvent actionEvent) throws IOException {
         SceneSwitchingUtils.switchScene(actionEvent, "userprofile-view.fxml");
     }
 
