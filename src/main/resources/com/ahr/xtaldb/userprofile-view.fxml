@@ -30,8 +30,8 @@
          </font>
       </Label>
       <ListView fx:id="productList" layoutX="101.0" layoutY="300.0" prefHeight="400.0" prefWidth="494.0" stylesheets="@../../../listviewstyle.css" />
-      <ListView fx:id="achivementsList" layoutX="645.0" layoutY="300.0" prefHeight="400.0" prefWidth="310.0" stylesheets="@../../../listviewstyle.css" />
-      <Label layoutX="645.0" layoutY="241.0" stylesheets="@../../../fontstyleReg.css" text="achivements:">
+      <ListView fx:id="achievementsList" layoutX="645.0" layoutY="300.0" prefHeight="400.0" prefWidth="310.0" stylesheets="@../../../listviewstyle.css" />
+      <Label layoutX="645.0" layoutY="241.0" stylesheets="@../../../fontstyleReg.css" text="achievements:">
          <font>
             <Font size="43.0" />
          </font>

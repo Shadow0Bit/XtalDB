@@ -14,7 +14,7 @@ public class UserprofileController implements Initializable {
     public Label usernameLabel;
     public Label balance;
     public Label userIDLabel;
-    public ListView<String> productList, achivementsList, wishlist;
+    public ListView<String> productList, achievementsList, wishlist;
     public Button homeButton;
 
     @Override
