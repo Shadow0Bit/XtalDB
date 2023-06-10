@@ -94,6 +94,7 @@ public class DatabaseUtils {
     public static UserInfo getUserInfo(User user) throws SQLException{
         UserInfo out = new UserInfo();
         out.user = user;
+
         LinkedList<Product> products = new LinkedList<>();
         PreparedStatement pstm = connection.prepareStatement("select idprojekt.usersProducts(?);");
         pstm.setInt(1, user.id);
@@ -103,6 +104,23 @@ public class DatabaseUtils {
             products.add(new Product(getProduct(pid), pid));
         }
         out.products = products;
+        
+        pstm = connection.prepareStatement("select wallet from idprojekt.users where user_id = ?;");
+        pstm.setInt(1, user.id);
+        result = pstm.executeQuery();
+        result.next();
+        out.money = result.getInt("wallet");
+
+        LinkedList<Product> wishlist = new LinkedList<>();
+        pstm = connection.prepareStatement("select idprojekt.wishList(?);");
+        pstm.setInt(1, user.id);
+        result = pstm.executeQuery();
+        while(result.next()){
+            int pid = result.getInt("usersproducts");
+            wishlist.add(new Product(getProduct(pid), pid));
+        }
+        out.wishlist = wishlist;
+
         return out;
     };
 }
