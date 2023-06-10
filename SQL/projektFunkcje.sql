@@ -1,5 +1,5 @@
 -- (person ID) -> list of friends' IDs
-CREATE OR REPLACE FUNCTION FriendsOf(userID INT)
+CREATE OR REPLACE FUNCTION idprojekt.FriendsOf(userID INT)
 RETURNS TABLE(friendID INT) AS $$ BEGIN
     RETURN QUERY(
     SELECT CASE
@@ -9,10 +9,24 @@ RETURNS TABLE(friendID INT) AS $$ BEGIN
     user1_ID = userID OR user2_ID = userID);
 END; $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION idprojekt.NonFriendsOf(userID INT)
+RETURNS TABLE(user_id INT) AS $$ BEGIN
+    RETURN QUERY(
+    SELECT u.user_id FROM idprojekt.users u
+    WHERE u.user_id NOT IN ((
+        SELECT CASE
+        WHEN user1_ID = userID THEN user2_ID
+        ELSE user1_ID END friendID
+        FROM idprojekt.friends WHERE 
+        user1_ID = userID OR user2_ID = userID)
+    )
+    );
+END; $$ LANGUAGE plpgsql;
+
 -- tu chyba zle znizke nalicza ???
 -- cos z data nie tak ??? dziwna sprawa
 -- (product ID) -> cena (ze zniżką)
-CREATE OR REPLACE FUNCTION PriceOf(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.PriceOf(productID INT)
 RETURNS MONEY AS $$ 
 DECLARE price MONEY;
 BEGIN
@@ -32,7 +46,7 @@ BEGIN
 END; $$ LANGUAGE plpgsql;
 
 --(user ID) -> list of user's products' ids
-CREATE OR REPLACE FUNCTION usersProducts(userID INT)
+CREATE OR REPLACE FUNCTION idprojekt.usersProducts(userID INT)
 RETURNS TABLE(productID INT) AS $$ BEGIN
 RETURN QUERY(
     SELECT up.product_id FROM idprojekt.users_products up
@@ -41,7 +55,7 @@ RETURN QUERY(
 END; $$ LANGUAGE plpgsql;
 
 -- (userID, productID) -> list of user's achievemnts in the game
-CREATE OR REPLACE FUNCTION usersAchievementsIn(userID INT, productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.usersAchievementsIn(userID INT, productID INT)
 RETURNS TABLE(achievement_id INT) AS $$ BEGIN
 RETURN QUERY(
     SELECT a.achievement_id FROM idprojekt.achievements a
@@ -51,19 +65,19 @@ RETURN QUERY(
 END; $$ LANGUAGE plpgsql;
 
 -- (productID) ->  Most information needed for making a game page
-CREATE OR REPLACE FUNCTION productInfo(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.productInfo(productID INT)
 RETURNS TABLE(name VARCHAR(64), quota INT, release_date DATE,
 publisher_name VARCHAR(64), description TEXT, price MONEY) AS $$ BEGIN
 RETURN QUERY(
     SELECT p.name, p.quota, p.release_date, d.developer_name, 
-    de.description, PriceOf(product_id)  
+    de.description, idprojekt.PriceOf(product_id)  
     FROM idprojekt.products p JOIN idprojekt.developers d
     ON(d.developer_id = p.product_id) NATURAL JOIN idprojekt.descriptions de
     WHERE p.product_id = productID
 ); END; $$ LANGUAGE plpgsql;
 
 -- (productID) -> Array of supported systems
-CREATE OR REPLACE FUNCTION supportedSystems(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.supportedSystems(productID INT)
 RETURNS VARCHAR(64)[] AS $$ BEGIN
     RETURN ARRAY(SELECT system_name FROM 
     idprojekt.product_systems ps NATURAL JOIN idprojekt.systems
@@ -71,7 +85,7 @@ RETURNS VARCHAR(64)[] AS $$ BEGIN
 END; $$ LANGUAGE plpgsql; 
 
 -- (productID) -> Array of developers
-CREATE OR REPLACE FUNCTION developersOf(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.developersOf(productID INT)
 RETURNS VARCHAR(64)[] AS $$ BEGIN
     RETURN ARRAY(SELECT developer_name FROM 
     idprojekt.products_developers pd 
@@ -80,7 +94,7 @@ RETURNS VARCHAR(64)[] AS $$ BEGIN
 END; $$ LANGUAGE plpgsql; 
 
 -- (gameID) -> list of this game's DLCs
-CREATE OR REPLACE FUNCTION DLCsOF(gameID INT)
+CREATE OR REPLACE FUNCTION idprojekt.DLCsOF(gameID INT)
 RETURNS TABLE(product_id INT) AS $$ BEGIN
     RETURN QUERY(
         SELECT dlc_id FROM idprojekt.dlcs d
@@ -89,7 +103,7 @@ RETURNS TABLE(product_id INT) AS $$ BEGIN
 END; $$ LANGUAGE plpgsql; 
 
 -- (gameID) -> Array of generes
-CREATE OR REPLACE FUNCTION genresOf(gameID INT)
+CREATE OR REPLACE FUNCTION idprojekt.genresOf(gameID INT)
 RETURNS VARCHAR(32)[] AS $$ BEGIN
     RETURN ARRAY(SELECT genre_name FROM 
     idprojekt.game_genre gg 
@@ -98,7 +112,7 @@ RETURNS VARCHAR(32)[] AS $$ BEGIN
 END; $$ LANGUAGE plpgsql;
 
 -- (product_id) -> List of NOT HIDDEN Achievements' id's
-CREATE OR REPLACE FUNCTION achievementsIn(gameID INT)
+CREATE OR REPLACE FUNCTION idprojekt.achievementsIn(gameID INT)
 RETURNS TABLE(achievement_id INT) AS $$ BEGIN
     RETURN QUERY(
         SELECT a.achievement_id FROM idprojekt.achievements a
@@ -107,7 +121,7 @@ RETURNS TABLE(achievement_id INT) AS $$ BEGIN
 END; $$ LANGUAGE plpgsql;
 
 -- (achievementID) -> Achievement name
-CREATE OR REPLACE FUNCTION achievementName(achievementID INT)
+CREATE OR REPLACE FUNCTION idprojekt.achievementName(achievementID INT)
 RETURNS VARCHAR(64) AS $$ BEGIN
     RETURN (SELECT a.achievement_name FROM 
     idprojekt.achievements a 
@@ -115,7 +129,7 @@ RETURNS VARCHAR(64) AS $$ BEGIN
 END; $$ LANGUAGE plpgsql;
 
 -- (achievementID) -> Achievement description
-CREATE OR REPLACE FUNCTION achievementDescription(achievementID INT)
+CREATE OR REPLACE FUNCTION idprojekt.achievementDescription(achievementID INT)
 RETURNS VARCHAR(255) AS $$ BEGIN
     RETURN (SELECT a.description FROM 
     idprojekt.achievements a 
@@ -123,7 +137,7 @@ RETURNS VARCHAR(255) AS $$ BEGIN
 END; $$ LANGUAGE plpgsql;
 
 -- (userID, gameID) -> List of user's achievements' id's (query)
-CREATE OR REPLACE FUNCTION userAchievements(userID INT, gameID INT)
+CREATE OR REPLACE FUNCTION idprojekt.userAchievements(userID INT, gameID INT)
 RETURNS TABLE(achievement_id INT) AS $$ BEGIN
     RETURN QUERY(
         SELECT a.achievement_id FROM idprojekt.achievements a
@@ -134,7 +148,7 @@ RETURNS TABLE(achievement_id INT) AS $$ BEGIN
 END; $$ LANGUAGE plpgsql;
 
 -- (productID) -> mean of reviews' scores
-CREATE OR REPLACE FUNCTION meanReviewScoreOf(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.meanReviewScoreOf(productID INT)
 RETURNS NUMERIC AS $$ BEGIN
 RETURN (
     SELECT AVG(r.score::NUMERIC) FROM idprojekt.reviews r
@@ -143,7 +157,7 @@ RETURN (
 END; $$ LANGUAGE plpgsql;
 
 -- (productID) -> review count
-CREATE OR REPLACE FUNCTION reviewCountOf(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.reviewCountOf(productID INT)
 RETURNS INT AS $$ BEGIN
 RETURN (
     SELECT COUNT(*) FROM idprojekt.reviews r
@@ -152,7 +166,7 @@ RETURN (
 END; $$ LANGUAGE plpgsql;
 
 -- (productID) -> list of all review descriptions
-CREATE OR REPLACE FUNCTION reviewsOf(productID INT)
+CREATE OR REPLACE FUNCTION idprojekt.reviewsOf(productID INT)
 RETURNS TABLE(user_id INT, score SMALLINT, description VARCHAR(255)) AS $$ BEGIN
 RETURN QUERY(
     SELECT r.user_id, r.score, r.description 
@@ -172,7 +186,7 @@ END; $$ LANGUAGE plpgsql;
 
 
 -- (productID, userID) -> gameTime
-CREATE OR REPLACE FUNCTION gameTimeIn(productID INT, userID INT)
+CREATE OR REPLACE FUNCTION idprojekt.gameTimeIn(productID INT, userID INT)
 RETURNS INT AS $$
 DECLARE ans INT;
 BEGIN
@@ -186,7 +200,7 @@ RETURN ans;
 END; $$ LANGUAGE plpgsql;
 
 -- (userID) -> wishList ids
-CREATE OR REPLACE FUNCTION wishList(userID INT)
+CREATE OR REPLACE FUNCTION idprojekt.wishList(userID INT)
 RETURNS TABLE(product_id INT) AS $$ BEGIN
     RETURN QUERY(
         SELECT wl.product_id FROM idprojekt.wish_list wl

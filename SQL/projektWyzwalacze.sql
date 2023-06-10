@@ -11,7 +11,7 @@
 
 --Blokowanie dodawania dwoch discountow na jeden
 --produkt w pokrywajacym sie przedziale czasowym
-CREATE OR REPLACE FUNCTION noCollidingDiscounts()
+CREATE OR REPLACE FUNCTION idprojekt.noCollidingDiscounts()
 RETURNS TRIGGER AS $$
 DECLARE 
     s DATE;
@@ -31,7 +31,7 @@ END; $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER discountsCheck BEFORE INSERT
 ON idprojekt.discounted_products 
-FOR EACH ROW EXECUTE PROCEDURE noCollidingDiscounts();
+FOR EACH ROW EXECUTE PROCEDURE idprojekt.noCollidingDiscounts();
 
 -- Dodawanie krotek przy Update na price history
 -- Najpierw musimy przekminic czy nie zmienic na timestamp
