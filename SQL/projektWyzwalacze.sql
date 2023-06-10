@@ -57,18 +57,3 @@ END; $$ LANGUAGE plpgsql;
 CREATE TRIGGER onWishListAdd BEFORE INSERT
 ON idprojekt.wish_list 
 FOR EACH ROW EXECUTE PROCEDURE idprojekt.wishListCheck();
-
--- Dodawanie krotek przy Update na price history
--- Najpierw musimy przekminic czy nie zmienic na timestamp
-
--- CREATE OR REPLACE FUNCTION onPriceHistoryUpdate()
--- RETURNS TRIGGER AS $$
--- BEGIN
---     INSERT INTO idprojekt.price_history VALUES 
---     (NEW.product_id, NEW.price, CURRENT_DATE);
---     RETURN OLD;
--- END; $$ LANGUAGE plpgsql;
-
--- CREATE TRIGGER priceHistoryUpdate BEFORE UPDATE
--- ON idprojekt.price_history 
--- FOR EACH ROW EXECUTE PROCEDURE onPriceHistoryUpdate();
