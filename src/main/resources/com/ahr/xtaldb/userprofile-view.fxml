@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: fff5e9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ahr.xtaldb.UserprofileController">
    <children>
-      <Label fx:id="usernameLabel" layoutX="95.0" layoutY="75.0" prefHeight="166.0" prefWidth="798.0" stylesheets="@../../../fontstyle.css" text="username" textAlignment="CENTER">
+      <Label fx:id="usernameLabel" layoutX="102.0" layoutY="81.0" prefHeight="166.0" prefWidth="868.0" stylesheets="@../../../fontstyle.css" text="username" textAlignment="CENTER">
          <font>
             <Font size="96.0" />
          </font>
@@ -24,16 +24,16 @@
             <Font size="34.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="241.0" stylesheets="@../../../fontstyleReg.css" text="Games:">
+      <Label layoutX="182.0" layoutY="241.0" stylesheets="@../../../fontstyleReg.css" text="Games:">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <ListView fx:id="productList" layoutX="101.0" layoutY="300.0" prefHeight="400.0" prefWidth="494.0" stylesheets="@../../../listviewstyle.css" />
-      <ListView fx:id="achievementsList" layoutX="645.0" layoutY="300.0" prefHeight="400.0" prefWidth="310.0" stylesheets="@../../../listviewstyle.css" />
-      <Label layoutX="645.0" layoutY="241.0" stylesheets="@../../../fontstyleReg.css" text="achievements:">
+      <ListView fx:id="productList" layoutX="182.0" layoutY="300.0" prefHeight="400.0" prefWidth="327.0" stylesheets="@../../../listviewstyle.css" />
+      <ListView fx:id="achievementsList" layoutX="536.0" layoutY="300.0" prefHeight="400.0" prefWidth="310.0" stylesheets="@../../../listviewstyle.css" />
+      <Label layoutX="536.0" layoutY="256.0" prefHeight="48.0" prefWidth="251.0" stylesheets="@../../../fontstyleReg.css" text="achievements:">
          <font>
-            <Font size="43.0" />
+            <Font size="28.0" />
          </font>
       </Label>
       <Button fx:id="homeButton" layoutX="22.0" layoutY="15.0" mnemonicParsing="false" onAction="#goHome" prefHeight="34.0" prefWidth="32.0" text="&lt;-">
@@ -44,11 +44,20 @@
          <font>
             <Font size="67.0" />
          </font></Button>
-      <ListView fx:id="wishlist" layoutX="998.0" layoutY="300.0" prefHeight="400.0" prefWidth="310.0" stylesheets="@../../../listviewstyle.css" />
-      <Label layoutX="998.0" layoutY="241.0" stylesheets="@../../../fontstyleReg.css" text="wishlist:">
+      <ListView fx:id="wishlist" layoutX="875.0" layoutY="296.0" prefHeight="400.0" prefWidth="310.0" stylesheets="@../../../listviewstyle.css" />
+      <Label layoutX="875.0" layoutY="256.0" stylesheets="@../../../fontstyleReg.css" text="wishlist:">
          <font>
-            <Font size="43.0" />
+            <Font size="28.0" />
          </font>
       </Label>
+      <Button fx:id="friendsPageButton" layoutX="1235.0" layoutY="296.0" mnemonicParsing="false" onAction="#goToFriendsPage" prefHeight="29.0" prefWidth="73.0" text="friends" underline="true">
+         <stylesheets>
+            <URL value="@../../../fontstyleReg.css" />
+            <URL value="@../../../primitivebuttonstyle.css" />
+         </stylesheets>
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
