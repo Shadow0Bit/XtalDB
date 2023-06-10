@@ -21,14 +21,14 @@ public class UserprofileController implements Initializable {
         usernameLabel.setText(CurrentState.getLoggedUser().username);
         userIDLabel.setText("#" + String.valueOf(CurrentState.getLoggedUser().id));
 
-        productList.setCellFactory(param -> templateList);
-        wishlist.setCellFactory(param -> templateList);
+        productList.setCellFactory(param -> new templateList());
+        wishlist.setCellFactory(param -> new templateList());
 
         productList.getItems().addAll(CurrentState.getUserInfo().products);
-        wishlist.getItems().addAll(CurrentState.getUserInfo().products);
+        wishlist.getItems().addAll(CurrentState.getUserInfo().wishlist);
     }
 
-    ListCell<Product> templateList = new ListCell<Product>() {
+    class templateList extends ListCell<Product> {
         @Override
         protected void updateItem(Product item, boolean empty) {
             super.updateItem(item, empty);

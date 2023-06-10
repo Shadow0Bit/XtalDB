@@ -105,13 +105,13 @@ public class DatabaseUtils {
             products.add(new Product(getProduct(pid), pid));
         }
         out.products = products;
-        
+        //googluje
         pstm = connection.prepareStatement("select wallet from idprojekt.users where user_id = ?;");
         pstm.setInt(1, user.id);
         result = pstm.executeQuery();
         result.next();
         out.money = result.getFloat("wallet");
-
+        //windows moment
         LinkedList<Product> wishlist = new LinkedList<>();
         pstm = connection.prepareStatement("select idprojekt.wishList(?);");
         pstm.setInt(1, user.id);
@@ -124,4 +124,11 @@ public class DatabaseUtils {
 
         return out;
     };
+
+    public static ProductInfo getProductInfo(Product product) throws SQLException { //jest jeszcze egzamin <3
+        ProductInfo out = new ProductInfo();
+        out.product = product;
+
+        return out;
+    }
 }
