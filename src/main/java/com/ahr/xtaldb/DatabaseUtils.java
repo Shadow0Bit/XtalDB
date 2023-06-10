@@ -16,6 +16,7 @@ public class DatabaseUtils {
     public static void connect() {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ahr", "ahr", "ahr");
+            // System.out.println(getUserInfo(new User(2, " ")).money);
         } catch (SQLException e) {
             System.out.println("Eskeeeel");
             System.out.println(e);
@@ -116,7 +117,7 @@ public class DatabaseUtils {
         pstm.setInt(1, user.id);
         result = pstm.executeQuery();
         while(result.next()){
-            int pid = result.getInt("usersproducts");
+            int pid = result.getInt("wishlist");
             wishlist.add(new Product(getProduct(pid), pid));
         }
         out.wishlist = wishlist;

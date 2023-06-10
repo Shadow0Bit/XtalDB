@@ -63,6 +63,8 @@ public class LandingpageController implements Initializable {
                 }
             }
         });
+
+        balance.setText(String.valueOf(CurrentState.getUserInfo().money) + '$');
     }
 
     public void search(ActionEvent actionEvent) throws SQLException {
