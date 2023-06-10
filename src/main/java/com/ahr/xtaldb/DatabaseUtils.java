@@ -62,6 +62,14 @@ public class DatabaseUtils {
         return result.getString("username");
     }
 
+    public static String getProduct(int id) throws SQLException {
+        PreparedStatement pstm = connection.prepareStatement("select name from idprojekt.products where product_id=?;");
+        pstm.setInt(1, id);
+        ResultSet result = pstm.executeQuery();
+        result.next();
+        return result.getString("name");
+    }
+
     public static LinkedList<Product> getProducts() throws SQLException {
         LinkedList<Product> output = new LinkedList<>();
         PreparedStatement pstm = connection.prepareStatement("select * from idprojekt.productIDview;");
@@ -82,4 +90,19 @@ public class DatabaseUtils {
         }
         return output;
     }
+
+    public static UserInfo getUserInfo(User user) throws SQLException{
+        UserInfo out = new UserInfo();
+        out.user = user;
+        LinkedList<Product> products = new LinkedList<>();
+        PreparedStatement pstm = connection.prepareStatement("select idprojekt.usersProducts(?);");
+        pstm.setInt(1, user.id);
+        ResultSet result = pstm.executeQuery();
+        while(result.next()){
+            int pid = result.getInt("usersproducts");
+            products.add(new Product(getProduct(pid), pid));
+        }
+        out.products = products;
+        return out;
+    };
 }
