@@ -25,6 +25,7 @@ public class FriendsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameLabel.setText(CurrentState.getLoggedUser().username);
+        balance.setText(CurrentState.getUserInfo().getUserMoney());
 
     }
 

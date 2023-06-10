@@ -25,6 +25,7 @@ public class ReviewsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        balance.setText(CurrentState.getUserInfo().getUserMoney());
 
     }
 

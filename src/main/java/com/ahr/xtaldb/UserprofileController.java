@@ -20,6 +20,7 @@ public class UserprofileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameLabel.setText(CurrentState.getLoggedUser().username);
         userIDLabel.setText("#" + String.valueOf(CurrentState.getLoggedUser().id));
+        balance.setText(CurrentState.getUserInfo().getUserMoney());
 
         productList.setCellFactory(param -> new templateList());
         wishlist.setCellFactory(param -> new templateList());

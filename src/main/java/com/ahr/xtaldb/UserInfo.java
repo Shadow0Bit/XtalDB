@@ -8,4 +8,8 @@ public class UserInfo { //o to supa
     LinkedList<Product> products=null;
     LinkedList<Product> wishlist=null;
     UserInfo(){}
+
+    public String getUserMoney() {
+        return String.valueOf(money) + '$';
+    }
 }

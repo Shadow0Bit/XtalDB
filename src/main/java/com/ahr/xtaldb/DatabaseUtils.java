@@ -106,7 +106,7 @@ public class DatabaseUtils {
         }
         out.products = products;
         //googluje
-        pstm = connection.prepareStatement("select wallet from idprojekt.users where user_id = ?;");
+        pstm = connection.prepareStatement("select wallet::numeric from idprojekt.users where user_id = ?;");
         pstm.setInt(1, user.id);
         result = pstm.executeQuery();
         result.next();
