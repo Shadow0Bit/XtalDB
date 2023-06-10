@@ -1,5 +1,8 @@
 package com.ahr.xtaldb;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,7 +23,9 @@ public class DatabaseUtils {
         }
     }
 
-    public static int authUser(String username, String password) throws SQLException{
+    public static int authUser(String username, String password) throws SQLException, NoSuchAlgorithmException{
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        password = new String(digest.digest(password.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
         PreparedStatement pstm = connection.prepareStatement("select password, user_id from idprojekt.users where username=?;");
         pstm.setString(1, username);
         ResultSet result = pstm.executeQuery();
@@ -30,7 +35,9 @@ public class DatabaseUtils {
         return -1;
     }
 
-    public static int addUser(String username, String email, String password) throws SQLException{
+    public static int addUser(String username, String email, String password) throws SQLException, NoSuchAlgorithmException{
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        password = new String(digest.digest(password.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
         PreparedStatement pstm = connection.prepareStatement("select user_id from idprojekt.users where email=?;");
         pstm.setString(1, email);
         ResultSet result = pstm.executeQuery();

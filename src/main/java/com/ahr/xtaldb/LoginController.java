@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -26,7 +27,7 @@ public class LoginController implements Initializable {
 
     }
 
-    public void logIn(ActionEvent actionEvent) throws IOException, SQLException {
+    public void logIn(ActionEvent actionEvent) throws IOException, SQLException, NoSuchAlgorithmException {
         int userId = DatabaseUtils.authUser(usernameTextbox.getText(), passwordTextbox.getText());
         if (userId != -1) {
             CurrentState.setLoggedUser(new User(userId, DatabaseUtils.getUser(userId)));
