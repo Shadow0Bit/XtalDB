@@ -109,7 +109,7 @@ public class DatabaseUtils {
         pstm.setInt(1, user.id);
         result = pstm.executeQuery();
         result.next();
-        out.money = result.getInt("wallet");
+        out.money = result.getFloat("wallet");
 
         LinkedList<Product> wishlist = new LinkedList<>();
         pstm = connection.prepareStatement("select idprojekt.wishList(?);");

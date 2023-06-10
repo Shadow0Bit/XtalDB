@@ -2,10 +2,7 @@ package com.ahr.xtaldb;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,7 +12,7 @@ public class UserprofileController implements Initializable {
     public Label usernameLabel;
     public Label balance;
     public Label userIDLabel;
-    public ListView<String> productList, achievementsList, wishlist;
+    public ListView<Product> productList, achievementsList, wishlist;
     public Button homeButton;
     public Button friendsPageButton;
 
@@ -23,7 +20,26 @@ public class UserprofileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameLabel.setText(CurrentState.getLoggedUser().username);
         userIDLabel.setText("#" + String.valueOf(CurrentState.getLoggedUser().id));
+
+        productList.setCellFactory(param -> templateList);
+        wishlist.setCellFactory(param -> templateList);
+
+        productList.getItems().addAll(CurrentState.getUserInfo().products);
+        wishlist.getItems().addAll(CurrentState.getUserInfo().products);
     }
+
+    ListCell<Product> templateList = new ListCell<Product>() {
+        @Override
+        protected void updateItem(Product item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty || item == null) {
+                setText("");
+            } else {
+                setText(item.name);
+            }
+        }
+    };
 
     public void goHome(ActionEvent actionEvent) throws IOException {
         SceneSwitchingUtils.switchScene(actionEvent, "landingpage-view.fxml");
