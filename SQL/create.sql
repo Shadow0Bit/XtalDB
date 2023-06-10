@@ -75,7 +75,8 @@ CREATE  TABLE idprojekt.wish_list (
 	user_id              integer  NOT NULL  ,
 	product_id           integer  NOT NULL  ,
 	CONSTRAINT fk_wish_list_users FOREIGN KEY ( user_id ) REFERENCES idprojekt.users( user_id )   ,
-	CONSTRAINT fk_wish_list_products FOREIGN KEY ( product_id ) REFERENCES idprojekt.products( product_id )   
+	CONSTRAINT fk_wish_list_products FOREIGN KEY ( product_id ) REFERENCES idprojekt.products( product_id ),
+	PRIMARY KEY(user_id, product_id)  
  );
 
 CREATE  TABLE idprojekt.achievements ( 

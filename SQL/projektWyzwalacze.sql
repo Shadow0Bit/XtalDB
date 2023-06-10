@@ -33,6 +33,31 @@ CREATE TRIGGER discountsCheck BEFORE INSERT
 ON idprojekt.discounted_products 
 FOR EACH ROW EXECUTE PROCEDURE idprojekt.noCollidingDiscounts();
 
+-- Dodanie gry powoduje usuniecie z wish listy
+CREATE OR REPLACE FUNCTION idprojekt.deleteFromWishList()
+RETURNS TRIGGER AS $$ BEGIN
+    DELETE FROM idProjekt.wish_list
+    WHERE user_id = NEW.user_id AND product_id = NEW.product_id;
+    RETURN NEW;
+END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER onGameBuy BEFORE INSERT
+ON idprojekt.users_products 
+FOR EACH ROW EXECUTE PROCEDURE idprojekt.deleteFromWishList();
+
+--Do wish_listy nie mozna dodac posiadanej gry
+CREATE OR REPLACE FUNCTION idprojekt.wishListCheck()
+RETURNS TRIGGER AS $$ BEGIN
+    IF (SELECT COUNT(*) FROM idprojekt.users_products up 
+    WHERE up.user_id = NEW.user_id AND up.product_id = NEW.product_id)
+     > 0 THEN RETURN NULL; END IF;
+    RETURN NEW;
+END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER onWishListAdd BEFORE INSERT
+ON idprojekt.wish_list 
+FOR EACH ROW EXECUTE PROCEDURE idprojekt.wishListCheck();
+
 -- Dodawanie krotek przy Update na price history
 -- Najpierw musimy przekminic czy nie zmienic na timestamp
 
