@@ -60,6 +60,8 @@ public class LandingpageController implements Initializable {
                     SceneSwitchingUtils.switchSceneMouseEvent(mouseEvent, "product-view.fxml");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
