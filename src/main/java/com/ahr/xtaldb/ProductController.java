@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ProductController implements Initializable {
 
@@ -22,6 +23,9 @@ public class ProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productName.setText(CurrentState.getFocusedProduct().name);
+        quotaLabel.setText(String.valueOf(CurrentState.getProductInfo().quota) + "GB");
+        releaseDate.setText(String.valueOf(CurrentState.getProductInfo().release_date));
+        genre.setText(CurrentState.getProductInfo().genres.stream().collect(Collectors.joining(", ")));
         balance.setText(CurrentState.getUserInfo().getUserMoney());
 
     }

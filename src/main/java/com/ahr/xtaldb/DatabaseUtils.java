@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class DatabaseUtils {
@@ -17,6 +18,10 @@ public class DatabaseUtils {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ahr", "ahr", "ahr");
             // System.out.println(getUserInfo(new User(2, " ")).money);
+            // ProductInfo p = getProductInfo(new Product(" ", 3));
+            // for (String s : p.genres) {
+            //     System.out.println(s);
+            // }
         } catch (SQLException e) {
             System.out.println("Eskeeeel");
             System.out.println(e);
@@ -125,10 +130,26 @@ public class DatabaseUtils {
         return out;
     };
 
-    public static ProductInfo getProductInfo(Product product) throws SQLException { //jest jeszcze egzamin <3
+    public static ProductInfo getProductInfo(Product product) throws SQLException{
         ProductInfo out = new ProductInfo();
         out.product = product;
 
+        PreparedStatement pstm = connection.prepareStatement("select quota, release_date from idprojekt.products where product_id = (?);");
+        pstm.setInt(1, product.id);
+        ResultSet result = pstm.executeQuery();
+        result.next();
+        out.quota = result.getInt("quota");
+        out.release_date = result.getDate("release_date");
+        pstm = connection.prepareStatement("select idprojekt.genresOf(?);");
+        pstm.setInt(1, product.id);
+        result = pstm.executeQuery();
+        result.next();
+        ResultSet rs2 = result.getArray("genresOf").getResultSet();
+        out.genres = new LinkedList<>();
+        while(rs2.next()) {
+            out.genres.add(rs2.getString(2));
+        }
+
         return out;
-    }
+    };
 }
