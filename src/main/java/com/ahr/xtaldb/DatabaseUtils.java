@@ -17,11 +17,6 @@ public class DatabaseUtils {
     public static void connect() {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ahr", "ahr", "ahr");
-            // System.out.println(getUserInfo(new User(2, " ")).money);
-            // ProductInfo p = getProductInfo(new Product(" ", 3));
-            // for (String s : p.genres) {
-            //     System.out.println(s);
-            // }
         } catch (SQLException e) {
             System.out.println("Eskeeeel");
             System.out.println(e);
@@ -110,13 +105,13 @@ public class DatabaseUtils {
             products.add(new Product(getProduct(pid), pid));
         }
         out.products = products;
-        //googluje
+
         pstm = connection.prepareStatement("select wallet::numeric from idprojekt.users where user_id = ?;");
         pstm.setInt(1, user.id);
         result = pstm.executeQuery();
         result.next();
         out.money = result.getFloat("wallet");
-        //windows moment
+
         LinkedList<Product> wishlist = new LinkedList<>();
         pstm = connection.prepareStatement("select idprojekt.wishList(?);");
         pstm.setInt(1, user.id);
